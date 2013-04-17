@@ -1,3 +1,5 @@
+//RandomUsername(Nikola Jovanovic)
+//Prim's algorithm
 #include <cstdlib>
 #include <iostream>
 #include <stdio.h>
