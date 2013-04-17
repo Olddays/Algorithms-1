@@ -76,12 +76,12 @@ int main(int argc, char *argv[])
       scanf("%d %d",&n,&m);
       for(int i=0;i<=m-1;i++)
       {
-             scanf("%d %d %d",&v1,&v2,&weight);
+             scanf("%d %d %d",&v1,&v2,&weight);//1 based graph
              pom.w=weight;
              pom.a=v1; pom.b=v2;
              a[v1].adj.push_back(pom);
-             pom.a=v2; pom.b=v1;
-             a[v2].adj.push_back(pom); 
+             pom.a=v2; pom.b=v1; //Only if bidirectional
+             a[v2].adj.push_back(pom); //Only if bidirectional
       }
     prim();
     printf("Minimum spanning tree:\n");
