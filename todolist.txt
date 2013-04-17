@@ -1,0 +1,24 @@
+Shortest path:
+Dijkstra
+Bellman-Ford
+Floyd-Warshall
+
+Structures:
+Heap
+Hash
+BIT
+Segment Tree
+- DSU
+
+Graphs:
+Tarjan SCC
+Articulation vertices, bridges, BCC
+- Prim / Kruskal MST
+- Euler Tour
+- Ford-Fulkerson
+
+Other:
+- Graham Scan
+- K-D Tree
+- Knuth-Morris-Pratt / Z-algorithm
+- Suffix Array
