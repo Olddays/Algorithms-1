@@ -6,15 +6,15 @@ Heap
 Hash
 BIT
 Segment Tree
-- DSU
+DSU
 
 Graphs:
 Tarjan SCC
 Articulation vertices, bridges, BCC
-- Prim / Kruskal MST
-- Euler Tour
-- Ford-Fulkerson
-- LCA
+Prim / Kruskal MST
+- Euler Tour (Possibly skip for now?)
+- Ford-Fulkerson (Possibly skip for now?)
+- LCA (2^n)
 
 Shortest path:
 Dijkstra
@@ -22,7 +22,9 @@ Bellman-Ford
 Floyd-Warshall
 
 Other:
-- Graham Scan
-- K-D Tree
-- Knuth-Morris-Pratt / Z-algorithm
-- Suffix Array
+- Graham Scan for CH (Important)
+- K-D Tree (BST*k)
+- Knuth-Morris-Pratt / Z-algorithm (Important)
+- Suffix Array (Petar says it's important?!)
+
+Also, add some more elementary shit and sort it to make it more useful. But some other time.
