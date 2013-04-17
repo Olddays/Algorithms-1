@@ -1,7 +1,5 @@
-Shortest path:
-Dijkstra
-Bellman-Ford
-Floyd-Warshall
+Needed stuff
+----------------
 
 Structures:
 Heap
@@ -16,6 +14,12 @@ Articulation vertices, bridges, BCC
 - Prim / Kruskal MST
 - Euler Tour
 - Ford-Fulkerson
+- LCA
+
+Shortest path:
+Dijkstra
+Bellman-Ford
+Floyd-Warshall
 
 Other:
 - Graham Scan
