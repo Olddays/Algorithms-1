@@ -1,5 +1,7 @@
 //RandomUsername(Nikola Jovanovic)
-//Prim's algorithm
+//Prim's algorithm 
+//O(|E| log |V|)
+//Works only on connected graphs, computes MST.
 #include <cstdlib>
 #include <iostream>
 #include <stdio.h>
@@ -66,7 +68,7 @@ void Prim()//Prim dies in the third book.
               h.pop();
             }
             a[pom.b].visited=true;//new node is visited
-            mst[i]=pom;//add it to mst[]
+            mst[i].a=pom.a; mst[i].b=pom.b; mst[i].w=pom.w;//add it to mst[]
             curr=pom.b;//make it current
             mstsum+=pom.w;//increase mstsum
     }
@@ -85,12 +87,12 @@ int main(int argc, char *argv[])
              pom.a=v2; pom.b=v1; //Only if bidirectional
              a[v2].adj.push_back(pom); //Only if bidirectional
       }
-    prim();
+    Prim();
     printf("Minimum spanning tree:\n");
     for(int i=1;i<=n-1;i++)
      printf("Edge %d - %d ( Weight: %d )\n",mst[i].a,mst[i].b,mst[i].w);
     printf("Sum of weights: %d\n",mstsum);
-    //system("PAUSE");
+    system("PAUSE");
     return  0;
 }
 /*
