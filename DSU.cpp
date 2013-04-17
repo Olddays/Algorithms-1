@@ -1,6 +1,6 @@
 //RandomUsername(Nikola Jovanovic)
 //Union-Find(Disjoint Set Union)
-//Implemented for: How Many Components?
+//Implemented for: How Many Components? (z-trening)
 #include <cstdlib>
 #include <iostream>
 #include <stdio.h>
