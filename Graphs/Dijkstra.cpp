@@ -1,7 +1,8 @@
 //RandomUsername(Nikola Jovanovic)
 //Dijkstra's algorithm (Shortest paths)
 //Implemented for task: highwayz (z-trening)
-//Runtime:E+VlogV, single source, only nonnegative egde weights
+//Runtime:E log V + V log V, single source, only nonnegative egde weights
+//We can accomplish E + V log V with fibonacci heap (totally not worth it)
 #include <cstdlib>
 #include <iostream>
 #include <stdio.h>
