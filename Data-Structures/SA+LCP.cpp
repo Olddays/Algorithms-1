@@ -113,3 +113,10 @@ int main()
 
     return 0;
 }
+
+//Practice tasks:
+//http://www.z-trening.com/tasks.php?show_task=5000001916
+//http://www.z-trening.com/tasks.php?show_task=5000000451
+//http://www.z-trening.com/tasks.php?show_task=5000001626
+//http://www.z-trening.com/tasks.php?show_task=5000000320
+//http://www.codechef.com/MARCH14/problems/SSTORY
