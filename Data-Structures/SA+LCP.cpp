@@ -20,9 +20,6 @@ int SA[MAXLEN], LCP[MAXLEN]; //SA+LCP
 int tmp[MAXLEN], posInSA[MAXLEN]; //position of i in SA, used as a hint for sorting
 int currPaired; //used in LCP build
 
-//Algoritam koji generise sufiksni niz i niz najdužeg zajedničkog prefiksa (LCP) nad datim stringom
-//Slozenost:  za sufiksni niz, O(n) za LCP niz
-
 bool suffcmp(int i, int j)//used for smart sorting
 {
     //different bucket
