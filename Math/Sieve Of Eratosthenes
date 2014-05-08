@@ -1,5 +1,5 @@
 //RandomUsername(Nikola Jovanovic)
-//Sieve Of Erathostens
+//Sieve Of Eratosthenes
 //Runtime: O(n)
 
 #include <cstdlib>
