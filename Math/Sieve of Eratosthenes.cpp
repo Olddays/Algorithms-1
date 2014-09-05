@@ -36,7 +36,7 @@ void Sieve(int lmt)
 }
 
 //I also implemented the sieve translation technique for counting primes in an interval [a,b]
-//With a sieve up to sqrt(a) we can just find primes in [a,b] in O(n) instead in O(n*isprime())
+//With a sieve up to sqrt(b) we can just find primes in [a,b] in O(n) instead in O(n*isprime())
 void TransSieve(int a,int b)
 {
     int rng=b-a+1;
