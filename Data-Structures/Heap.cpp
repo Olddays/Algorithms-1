@@ -33,12 +33,12 @@ void pop()
     bool leaf=false;
     while(!leaf)
     {
-            if(2*i+1<=lastel && h[2*i+1]>h[2*i])
+            if(2*i+1<=lastel && h[2*i+1]>h[2*i] && h[2*i+1]>h[i])
              {
                  swap(h[i],h[2*i+1]);
                  i=2*i+1;
              }
-            else if(2*i<=lastel)
+            else if(2*i<=lastel && h[2*i]>h[2*i+1] && h[2*i]>h[i])
              {
                  swap(h[i],h[2*i]);
                  i*=2;
