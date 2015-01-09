@@ -77,8 +77,8 @@ void buildLCP()
     currPaired=0;
     //main loop(banana,anana,nana,ana,na,a)
     for(int i=0;i<=len-1;i++)
-      if(posInSA[i]!=len-1) //s[len] doesn't exist
-      {
+      if(posInSA[i]!=len-1) //s[len] doesn't exist, currPaired is always 0 when you're about to skip one iteration 
+      {                     //currPaired > 0 => LCP[posInSA[i-1]] > 1 => LCP[posInSA[i]] > 0 => posInSA[i] != len - 1
           //we are currently computing LCP(i,j=i's successor in SA)
           j=SA[posInSA[i]+1];
           //manually find the longest common prefix
@@ -87,9 +87,9 @@ void buildLCP()
           //write it down
           LCP[posInSA[i]]=currPaired;
           //decrease it only by one to prepare for the next iteration
-          //if SA[posInSA[i]] and SA[posInSA[j]] have currPaired in common
-          //the successor of SA[posInSA[i+1]] must have at least currPaired-1
-          //in common with SA[posInSA[i+1]] (SA[posInSA[i+1]]=SA[posInSA[i]] without the first char)
+          //if i and j have currPaired in common
+          //the successor of i+1 must have at least currPaired-1
+          //in common with i+1 (i+1 = i without the first char)
           if(currPaired>0)
             currPaired--;
       }
