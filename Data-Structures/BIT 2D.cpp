@@ -1,88 +1,80 @@
-//RandomUsername(Nikola Jovanovic)
-//BIT 2D (Implement for the task: MATSUM(SPOJ))
+#include <bits/stdc++.h>
+#define MAXN 1005
 
-#include <cstdlib>
-#include <iostream>
-#include <stdio.h>
-#define MAXN 1024
 using namespace std;
 
-long long bit[MAXN+1][MAXN+1];//BIT
-int t,n,i1,j1,i2,j2,val,sum=0;
-char pom[5];
+//BIT 2D
+//Update O(log^2 N), Query O(log^2 N)
+//Practice task: http://www.codechef.com/problems/MATSUM/
 
-void set(int i,int j,int val)//Works like 1D just with one more nested loop.
+using namespace std;
+
+int n, m; //n x m matrix
+int a[MAXN][MAXN]; //matrix
+int bit[MAXN][MAXN]; //BIT
+
+//Works like 1D just with one more nested loop
+
+void Update(int i,int j,int inc)
 {
     int j1;
-    while(i<=n)
+    while(i <= n)
     {
-                  j1=j;
-                  while(j1<=n)
+                  j1 = j;
+                  while(j1 <= m)
                   {
-                    bit[i][j1]+=val;
-                    j1+=(j1 & -j1);
+                    bit[i][j1] += inc;
+                    j1 += (j1 & -j1);
                   }
-                  i+=(i & -i);
+
+                  i += (i & -i);
     }
 }
 
-long long get(int i,int j)//Works like 1D just with one more nested loop.
+int Query(int i,int j)
 {
+    int ret = 0;
     int j1;
-    long long sum=0;
-    while(i>=1)
+    while(i >= 1)
     {
-                  j1=j;
-                  while(j1>=1)
+                  j1 = j;
+                  while(j1 >= 1)
                   {
-                    sum+=bit[i][j1];
-                    j1-=(j1 & -j1);
+                    ret += bit[i][j1];
+                    j1 -= (j1 & -j1);
                   }
-                  i-=(i & -i);
-    }
-    return sum;
-}
 
-int get_sq(int i1,int j1,int i2,int j2)//Inclusion-exclusion principle for rect sum(sq=rect)
-{
-    long long sum=get(i2,j2)-get(i1-1,j2)-get(i2,j1-1)+get(i1-1,j1-1);
-    int ret=sum;
+                  i -= (i & -i);
+    }
     return ret;
 }
 
-
-int clear()//duh.
+int RectangleQuery(int i1, int j1, int i2, int j2) //Inc-Exc
 {
-    for(int i=1;i<=n;i++)
-     for(int j=1;j<=n;j++)
-      bit[i][j]=0;
+    return Query(i2, j2) - Query(i1 - 1, j2) - Query(i2, j1 - 1) + Query(i1 - 1, j1 - 1);
 }
 
-int main(int argc, char *argv[])
+int main()
 {
-           //Task related stuff, only impotant stuff:
-            scanf("%d",&n);
-            clear();
-            pom[2]='X';
-            while(pom[2]!='D')//END
-            {
-               scanf("%s",pom);
-               if(pom[2]=='T')//SET
-               {
-                       scanf("%d %d %d",&i1,&j1,&val);
-                       val-=get_sq(i1+1,j1+1,i1+1,j1+1);//Because we wanna set the value 
-                       //of matrix[i1][j1] to val, and BIT works with increments, what
-                       //we do first is read what is actually the value of matrix[i1][j1]
-                       //and adjust val so that it's an increment
-                       set(i1+1,j1+1,val);//Thus, we increment
-               }
-               else if(pom[2]=='M')//SUM
-               {
-                       scanf("%d %d %d %d",&i1,&j1,&i2,&j2);
-                       sum=get_sq(i1+1,j1+1,i2+1,j2+1); //This. We get a sum of a rectangle.                      printf("%d\n",sum);   
-               }
-            }
-    
-    system("PAUSE");
+    //Testing
+    int q;
+    int i1, j1, i2, j2, inc;
+    int l, r, kom;
+    scanf("%d %d",&n, &m);
+    scanf("%d",&q);
+    for(int i=1; i<=q; i++)
+    {
+        scanf("%d",&kom);
+        if(kom == 1) //increment by inc
+        {
+            scanf("%d %d %d",&i1, &j1, &inc);
+            Update(i1, j1, inc);
+        }
+        else if(kom == 2) //sumRectangle (i1,j1) - (i2,j2)
+        {
+            scanf("%d %d %d %d",&i1, &j1, &i2, &j2);
+            printf("%d\n",RectangleQuery(i1, j1, i2, j2));
+        }
+    }
     return 0;
 }
