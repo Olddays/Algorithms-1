@@ -2,7 +2,7 @@
 //Hash
 #include <cstdlib>
 #include <iostream>
-#include <stdio.h
+#include <stdio.h>
 #define MAXN 100000
 #define MOD 1720031
 using namespace std;
