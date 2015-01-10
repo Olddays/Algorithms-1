@@ -52,7 +52,8 @@ void HLD(int curr,int chainTop)//computing chainTop
     g[curr].chainTop=chainTop; //set chainTop
     int limit=g[curr].adj.size();
     for(int i=0;i<limit;i++)//visit each child
-    {
+    {  //if we travel down the light edge, our nodesUnder should be reduced by at least 50%
+        //this can guarantee at most logN nodes in each root->leaf path
         if( (1.0*g[g[curr].adj[i]].nodesUnder) > (0.5*g[curr].nodesUnder) )//heavy edge condition
             HLD(g[curr].adj[i],chainTop); //continue the chain
         else
