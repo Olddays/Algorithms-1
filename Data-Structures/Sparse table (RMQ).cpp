@@ -1,5 +1,5 @@
 //RandomUsername (Nikola Jovanovic)
-//RMQ constant structure
+//Sparse table (RMQ)
 //http://wiki.xfer.hr/konstantna/
 
 #include <bits/stdc++.h>
