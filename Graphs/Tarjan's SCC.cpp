@@ -1,97 +1,114 @@
-//RandomUsername(Nikola Jovanovic)
-//Computing strongly connected components, Tarjan's algorithm
-#include <cstdlib>
-#include <iostream>
-#include <stdio.h>
-#include <vector>
-#include <stack>
-#define MAXN 100
+//RandomUsername (Nikola Jovanovic)
+//Tarjan's SCC
+//O(V + E)
+
+#include <bits/stdc++.h>
+#define MAXN 30005
+#define lld long long
+#define ff(i,a,b) for(int i=a; i<=b; i++)
+#define fb(i,a,b) for(int i=a; i>=b; i--)
+#define par pair<int, int>
+#define fi first
+#define se second
+#define mid (l+r)/2
+
 using namespace std;
 
 struct node
 {
-       int low,dfn;//dfs numbering, 'low'
-       vector<int> adj;//neighbours
-       bool onstack;
+    int disc; //dfs numbering, time discovered
+    int low; //lowpoint, reachable node with the lowest disc
+    bool onStack; //is it in the current SCC
+    int comp; //component?
+    vector<int> adj; //children
 };
 
-node a[MAXN];//graph
-int n,m,b1,b2;
-int dfscnt=1;//dfs numbering
-stack<int> compvs;//output stack
-int componentcount=1;//component count, duuh.
+int compCnt;
+int discCnt;
 
-void PrintComponent(int v)//output v's component
+node g[MAXN];
+int n, m;
+int u, v;
+
+stack<int> s;
+
+void SCC(int curr)
 {
-    int x=-1;
-    printf("Component %d: ",componentcount++);    
-    while(x!=v)//pop from the output stack until you reach v
+    int nxt;
+
+    g[curr].disc = ++discCnt;
+    g[curr].low = g[curr].disc;
+    s.push(curr);
+    g[curr].onStack = true;
+
+    int limit = g[curr].adj.size();
+    for(int i=0; i<limit; i++)
     {
-         x=compvs.top();
-         a[x].onstack=false;
-         compvs.pop();
-         printf("%d ",x);
+        nxt = g[curr].adj[i];
+
+        if(g[nxt].disc == 0) //tree edge
+        {
+            SCC(nxt);
+            g[curr].low = min(g[curr].low, g[nxt].low);
+        }
+        else if(g[nxt].onStack) //relevant back/cross edge
+        {
+            g[curr].low = min(g[curr].low, g[nxt].disc);
+        }
     }
-    printf("\n");
+    if(g[curr].low == g[curr].disc)
+    {
+        ++compCnt;
+        //SCC component head
+        nxt = 0;
+        while(!s.empty() && nxt != curr)
+        {
+            nxt = s.top();
+            s.pop();
+            g[nxt].onStack = false;
+            g[nxt].comp = compCnt;
+        }
+    }
 }
 
-//l[v]=lowpoint[v]=min{dfn of v, min{lowpoint of v's children}
-//dfn of a node that is obtained by a back edge from v or its children
-void Tarjan(int v)
+int main()
 {
-     compvs.push(v);  //add to the output stack
-     a[v].onstack=true;//added
-     a[v].dfn=dfscnt++;//update numbering
-     a[v].low=a[v].dfn;//update low
-     
-     int limit=a[v].adj.size();
-     int x;
-     
-     for(int i=0;i<limit;i++)//all neighbours
-     {
-        x=a[v].adj[i];//neighbour x
-        if(a[x].dfn==0)//not visited 
-        {
-          Tarjan(x);//recurse
-          a[v].low=min(a[v].low,a[x].low);//update low
-        }
-        else if(a[x].onstack)//if on stack
-        {
-          a[v].low=min(a[v].low,a[x].dfn);//update low
-        }
-     }
-     if (a[v].low==a[v].dfn)//v is the head of a component, print v's subtree+v
-       PrintComponent(v);   
+    compCnt = 0;
+    discCnt = 0;
+    scanf("%d %d", &n, &m);
+    for(int i=1; i<=m; i++)
+    {
+        scanf("%d %d", &u, &v);
+        g[u].adj.push_back(v);
+    }
+    for(int i=1; i<=n; i++)
+    {
+       if(g[i].disc == 0)
+        SCC(i);
+    }
+    for(int i=1; i<=n; i++)
+    {
+       printf("Node : %d SCC : %d\n", i, g[i].comp);
+    }
+    return 0;
 }
 
-int main(int argc, char *argv[])
-{
-      scanf("%d %d",&n,&m);//input
-      for(int i=0;i<=m-1;i++)
-       {
-         scanf("%d %d",&b1,&b2);
-         a[b1].adj.push_back(b2);//directed
-       }
-      Tarjan(0);//go!
-      system("PAUSE");
-      return 0;
-}
 /*
-Testcase from http://en.wikipedia.org/wiki/Strongly_connected_component
-Numbering is normal.
+Practice problem : http://codeforces.com/problemset/problem/427/C
+TP : http://en.wikipedia.org/wiki/Tarjan%27s_strongly_connected_components_algorithm
 8 14
-0 1
-1 4
-4 0
-1 5
-4 5
 1 2
+3 1
+4 3
+4 2
 2 3
-3 2
-3 7
-7 3
-7 6
-2 6
+4 5
+5 4
 5 6
-6 5
+6 3
+6 7
+7 6
+8 8
+8 7
+8 5
 */
