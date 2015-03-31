@@ -23,19 +23,20 @@ struct node
     vector<int> adj; //children
 };
 
-int compCnt;
-int discCnt;
+int compCnt; //number of components
+int discCnt; //discovery counter
 
-node g[MAXN];
+node g[MAXN]; //the graph
+
 int n, m;
 int u, v;
-
 stack<int> s;
 
 void SCC(int curr)
 {
     int nxt;
 
+    //process curr
     g[curr].disc = ++discCnt;
     g[curr].low = g[curr].disc;
     s.push(curr);
@@ -44,7 +45,7 @@ void SCC(int curr)
     int limit = g[curr].adj.size();
     for(int i=0; i<limit; i++)
     {
-        nxt = g[curr].adj[i];
+        nxt = g[curr].adj[i]; //next node we process
 
         if(g[nxt].disc == 0) //tree edge
         {
@@ -56,12 +57,11 @@ void SCC(int curr)
             g[curr].low = min(g[curr].low, g[nxt].disc);
         }
     }
-    if(g[curr].low == g[curr].disc)
+    if(g[curr].low == g[curr].disc) //we found a new SCC
     {
         ++compCnt;
-        //SCC component head
-        nxt = 0;
-        while(!s.empty() && nxt != curr)
+        nxt = 0; //curr = SCC component head
+        while(!s.empty() && nxt != curr) //pop until we hit curr
         {
             nxt = s.top();
             s.pop();
@@ -73,6 +73,7 @@ void SCC(int curr)
 
 int main()
 {
+    //input
     compCnt = 0;
     discCnt = 0;
     scanf("%d %d", &n, &m);
@@ -81,11 +82,15 @@ int main()
         scanf("%d %d", &u, &v);
         g[u].adj.push_back(v);
     }
+    
+    //SCC
     for(int i=1; i<=n; i++)
     {
        if(g[i].disc == 0)
         SCC(i);
     }
+    
+    //output
     for(int i=1; i<=n; i++)
     {
        printf("Node : %d SCC : %d\n", i, g[i].comp);
