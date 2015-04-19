@@ -15,7 +15,7 @@
 using namespace std;
 
 /*
-TP (http://oi59.tinypic.com/35b86pz.jpg):
+TP (http://oi62.tinypic.com/14ybvoi.jpg):
 
 IN:
 15
